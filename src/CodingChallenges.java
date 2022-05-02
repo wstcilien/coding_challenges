@@ -27,7 +27,7 @@ public class CodingChallenges {
                  {5,65,16,37,41,2}
                        ||
               This will give you 64 because 65 - 1 = 64 and this the highest difference you can find
-            This has a time complexity of O(N).
+            This has a time complexity of O(a+b).
          */
         findAbsoluteDiff(6,a,b);
         int[][] A = {{1,4,2,4},
@@ -129,7 +129,7 @@ public class CodingChallenges {
 //        }else {
 //            System.out.println(absoluteDiff2);
 //        }
-        // This is an improved version which has a time complexity of O(N)
+        // This is an improved version which has a time complexity of O(A+B)
         int maxA = 0;
         int minA = A[0];
         int maxB,minB;
