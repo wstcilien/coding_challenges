@@ -48,7 +48,7 @@ public class CodingChallenges {
          */
 //        crossAddition(A);
         /*
-            Incomplete
+            IC
             this will print the sum of the path that gives you the high number
             you can only move diagonally to the right or to the right
              /
@@ -64,6 +64,9 @@ public class CodingChallenges {
                  {1 - 6 3 8}
                     ||
             This will give you {1,6,4,8} = 19
+            this has a time complexity of O(N)
+            Note: this problem will fail if you have a lot of duplicated values and
+                  if the arrays in the two-dimensional array are not equal in length
          */
 //        moverArr(A);
     }
@@ -149,19 +152,66 @@ public class CodingChallenges {
         System.out.println(map);
     }
     public static void moverArr(int[][] a){
-        for(int i=0;i<a.length;i++){
+//        {1,4,2,4}
+//        {1,5,3,5}
+//        {1,6,4,8}
+        int sum = 0;
+        int holder = 0;
+        int length = a.length;
+        for(int i=0;i<length;i++){
             int row =i;
-            int column =1;
-            for(int j=0;j<a[i].length;j++){
+            int column =0;
+            System.out.print(a[row][column]);
+            holder += a[row][column];
+
+            for(int j=1;j<a[i].length;j++){ column = j;
                 if(row==0){
-//                    if(a[row][])
+                    if((a[row][j]>a[row+1][column])&& length>row) {
+//                        System.out.print(a[row][column]);
+                        holder += a[row][column];
+                    }else{
+                        row++;
+//                        System.out.print(a[row][column]);
+                        holder += a[row][column];
+
+                    }
+                }else if(row <(length-1)){
+                    if((a[row][j]>a[row+1][column])&&(a[row][j]>a[row-1][column])) {
+//                        System.out.print(a[row][column]);
+                        holder += a[row][column];
+
+                    }else if((a[row-1][j]>a[row][column])&&(a[row-1][j]>a[row+1][column])) {
+                        row--;
+//                        System.out.print(a[row][column]);
+                        holder += a[row][column];
+
+                    }else{
+                        row++;
+//                        System.out.print(a[row][column]);
+                        holder += a[row][column];
+                    }
+                }else{
+                    if(a[row][j]>a[row-1][column]) {
+//                        System.out.print(a[row][column]);
+                        holder += a[row][column];
+
+                    }else{
+                        row--;
+//                        System.out.print(a[row][column]);
+                        holder += a[row][column];
+
+                    }
                 }
-                System.out.print(a[row][j]);
+                if(holder>sum){
+                    sum = holder;
+                    holder =0;
+                }
 
             }
-            System.out.println();
+//            System.out.println();
 
         }
+        System.out.println("Actual output: "+sum);
 
     }
 }
