@@ -3,64 +3,84 @@ import java.util.*;
 
 public class CodingChallenges {
     public static void main(String[] args) {
+        /*
+            Complete
+            this will print the binary form of the given integer
+            Exp: 6 -> 110 , 8 ->1000 , 3 -> 11
+            This has a time complexity of O(N)
+         */
+//        binary(3);
+         /*
+            Complete
+            this will print the number prime numbers that are between 0 and the input number
+            Exp: 20 -> 11 because [0, 1, 17, 2, 3, 19, 5, 7, 8, 11, 13] prime numbers.
+            This has a time complexity of O(N).
+         */
+//        prime(20);
 
-//        System.out.println(tree.getHead());
-        int x =8;
-        HashSet<String> ok = new HashSet<>();
-        Deque<String> deque = new ArrayDeque<>();
-        deque.add("a1");
-        deque.add("a2");
-//        boolean a = 0;
-//        deque.in
-//        binary(x);
-//        prime(x);
-//        System.out.println(isPrime(x));
         int[] a = {1,5,6,7,1,2};
         int[] b = {5,65,16,37,41,2};
+        /*
+            Complete
+            this will print the difference of the two numbers in each array will give you the maximum value
+            Exp: {1,5,6,7,1,2};
+                 {5,65,16,37,41,2}
+                       ||
+              This will give you 64 because 65 - 1 = 64 and this the highest difference you can find
+            This has a time complexity of O(Nlog(N)).
+         */
 //        findAbsoluteDiff(6,a,b);
-//        System.out.println(deque);
         int[][] A = {{1,4,2,4},
                      {1,5,3,5},
                      {1,6,4,8}};
-        int n = A[0].length;
-        int m = A.length;
-//        crossAddition(n,m,A);
-        moverArr(A);
-    }
-    public static void moverArr(int[][] a){
-        for(int i=0;i<a.length;i++){
-            int row =i;
-            int column =1;
-            for(int j=0;j<a[i].length;j++){
-                if(row==0){
-//                    if(a[row][])
-                }
-                System.out.print(a[row][j]);
-
-            }
-            System.out.println();
-
-        }
-
+        /*
+            Complete
+            this will print an array with the cross addition of the give two-dimensional array
+            Exp: {1,4,2,4}
+                 {1,5,3,5}
+                    ||
+            Exp: {1,4,2,4}
+                   / / /
+                 {1,5,3,5}
+                    ||
+            This will give you {1,5,7,7,5}
+            This has a time complexity of O(N)
+         */
+//        crossAddition(A);
+        /*
+            Incomplete
+            this will print the sum of the path that gives you the high number
+            you can only move diagonally to the right or to the right
+             /
+            1 -   like the direction given
+             \
+             Exp:{1,4,2,4}
+                 {1,5,4,5}
+                 {1,6,3,8}
+                    ||
+            Exp: {1  4 2 4}
+                 {1   5 4 5}
+                       / \
+                 {1 - 6 3 8}
+                    ||
+            This will give you {1,6,4,8} = 19
+         */
+//        moverArr(A);
     }
     public static void binary(int n){
-//        int counter =1;
-//        for(int i=counter;i<x;i++){
-//
-//        }
         String a="";
         String b = "";
         while(n>=1){
             a+=(n%2);
             n=(int) Math.floor(n/2);
-            System.out.println(a);
+//            System.out.println(a);
 
         }
         for (int i = a.length()-1; i >-1; i--) {
             b+=a.charAt(i);
         }
 
-//        System.out.println(Integer.valueOf(b));
+        System.out.println(Integer.valueOf(b));
     }
     public static void prime(int n){
         List<Integer> p = new ArrayList<>();
@@ -94,16 +114,7 @@ public class CodingChallenges {
                 }
             }
         }
-        System.out.println("real output: "+set.size());
-    }
-    public static boolean isPrime(int n){
-        if(n==2){return true;}
-        for(int i=2;i<n;i++){
-            if(n%i==0){
-                return false;
-            }
-        }
-        return true;
+        System.out.println("real output: "+set.size()+" "+set);
     }
     public static void findAbsoluteDiff(int N, int[] A, int[] B){
         Arrays.sort(A);
@@ -118,31 +129,39 @@ public class CodingChallenges {
 
 
     }
-    public static void crossAddition(int N, int M, int[][]A){
-//        System.out.println(N);
-        boolean valid = true;
-        for(int i=0;i<M;i++){
-            if(i==0 && A[i].length>0){
-                System.out.print(A[0][0]+" ");
-            }else if(A[i].length>0){
-                for(int j=0;j<A[i].length;j++){
-                    int row = i;
-                    int column =j;
-                    int sum = 0;
-                    while(valid){
-                        if((column<A[i].length)&&(row>=0)){
-                            sum += A[row][column];
-                            column++;
-                            row--;
-                        }else {
-                            valid = false;
-                        }
-                    }
-                    valid = true;
-                    System.out.print(sum+" ");
+    public static void crossAddition(int[][]A){
+        HashMap<Integer,Integer> map = new HashMap<>();
+        int counter = 0;
+        for(int i=0;i<A.length;i++){
+            for(int j:A[i]){
+                if(map.get(counter) ==null){
+                    map.put(counter,j);
+                    counter++;
+                }else{
+                    int add = map.get(counter) + j;
+                    map.put(counter,add);
+                    counter++;
                 }
             }
+            counter = i+1;
         }
-    }
 
+        System.out.println(map);
+    }
+    public static void moverArr(int[][] a){
+        for(int i=0;i<a.length;i++){
+            int row =i;
+            int column =1;
+            for(int j=0;j<a[i].length;j++){
+                if(row==0){
+//                    if(a[row][])
+                }
+                System.out.print(a[row][j]);
+
+            }
+            System.out.println();
+
+        }
+
+    }
 }
