@@ -27,9 +27,9 @@ public class CodingChallenges {
                  {5,65,16,37,41,2}
                        ||
               This will give you 64 because 65 - 1 = 64 and this the highest difference you can find
-            This has a time complexity of O(Nlog(N)).
+            This has a time complexity of O(N).
          */
-//        findAbsoluteDiff(6,a,b);
+        findAbsoluteDiff(6,a,b);
         int[][] A = {{1,4,2,4},
                      {1,5,3,5},
                      {1,6,4,8}};
@@ -120,14 +120,44 @@ public class CodingChallenges {
         System.out.println("real output: "+set.size()+" "+set);
     }
     public static void findAbsoluteDiff(int N, int[] A, int[] B){
-        Arrays.sort(A);
-        Arrays.sort(B);
-        int absoluteDiff1 = Math.abs(A[0]-B[N-1]);
-        int absoluteDiff2 = Math.abs(B[0]-A[N-1]);
-        if(absoluteDiff1>absoluteDiff2){
-            System.out.println(absoluteDiff1);
-        }else {
-            System.out.println(absoluteDiff2);
+//        Arrays.sort(A);
+//        Arrays.sort(B);
+//        int absoluteDiff1 = Math.abs(A[0]-B[N-1]);
+//        int absoluteDiff2 = Math.abs(B[0]-A[N-1]);
+//        if(absoluteDiff1>absoluteDiff2){
+//            System.out.println(absoluteDiff1);
+//        }else {
+//            System.out.println(absoluteDiff2);
+//        }
+        // This is an improved version which has a time complexity of O(N)
+        int maxA = 0;
+        int minA = A[0];
+        int maxB,minB;
+        maxB =0;
+        minB = B[0];
+        for (int i:A){
+            if(i>maxA){
+                maxA = i;
+            }
+            if(i<minA){
+                minA = i;
+            }
+        }
+        for (int i:B){
+            if(i>maxB){
+                maxB = i;
+            }
+            if(i<minB){
+                minB = i;
+            }
+        }
+        int sum1,sum2;
+        sum1 = Math.abs(maxB-minA);
+        sum2 = Math.abs(maxA - minB);
+        if(sum1>sum2){
+            System.out.println(sum1);
+        }else{
+            System.out.println(sum2);
         }
 
 
