@@ -2,7 +2,18 @@
 import java.util.*;
 
 public class CodingChallenges {
+    final String ok ="53";
     public static void main(String[] args) {
+        ThreeWayTree threeWayTree = new ThreeWayTree();
+//        threeWayTree.add(1);
+//        threeWayTree.add(8);
+//        threeWayTree.add(5);
+//        threeWayTree.add(6);
+//        threeWayTree.add(2);
+//        threeWayTree.add(9);
+//        threeWayTree.add(4);
+//        threeWayTree.add(3);
+//        threeWayTree.add(7);
         /*
             Complete
             this will print the binary form of the given integer
@@ -17,8 +28,12 @@ public class CodingChallenges {
             This has a time complexity of O(N).
          */
 //        prime(20);
-
         int[] a = {1,5,6,7,1,2};
+        int[] c = {1,5,6,7,1,2};
+//        System.out.println(a.hashCode());
+//        System.out.println(c.hashCode());
+//        System.out.println(a.equals(c));
+
         int[] b = {5,65,16,37,41,2};
         /*
             Complete
@@ -28,8 +43,9 @@ public class CodingChallenges {
                        ||
               This will give you 64 because 65 - 1 = 64 and this the highest difference you can find
             This has a time complexity of O(a+b).
+            Note: both a and can't have a length of zero
          */
-        findAbsoluteDiff(6,a,b);
+//        findAbsoluteDiff(6,a,b);
         int[][] A = {{1,4,2,4},
                      {1,5,3,5},
                      {1,6,4,8}};
@@ -69,6 +85,52 @@ public class CodingChallenges {
                   if the arrays in the two-dimensional array are not equal in length
          */
 //        moverArr(A);
+
+//            this will print the number of items in the array X is greater than M-sub-i array
+
+            int[] X ={3,5,4,6,8};
+            int [] M = {5};
+        /*
+            This will give you {4,4,7,3,1}
+            this has a time complexity of O(N)
+            Note: this problem will fail if you have a lot of duplicated values and
+                  if the arrays in the two-dimensional array are not equal in length
+         */
+
+        canBuy(M,X);
+    }
+    public static void canBuy(int[] M,int[] X){
+        Arrays.sort(X);
+        int min = X[0];
+        int middle = X[X.length/2];
+        int mid = X.length/2;
+        int max = X[X.length-1];
+        int[] arr = new int[M.length];
+        for(int i=0;i<M.length;i++){
+            if(M[i]<middle){
+                for(int j=0;j<mid+1;j++){
+                    if(M[i]<X[j]){
+                        arr[i] = j;
+                        j = mid;
+                    }
+                }
+            }else if(M[i]>=max){
+                arr[i] = X.length;
+
+            }else{
+                for(int j=mid;j< X.length;j++){
+                    if(M[i]<X[j]){
+                        arr[i] = j;
+                        j = max;
+                    }
+                }
+            }
+        }
+        System.out.println(Arrays.toString(M));
+        System.out.println(Arrays.toString(X));
+        System.out.println(Arrays.toString(arr));
+        HashMap<String,Integer> hashMap = new HashMap<>();
+//        Collections
     }
     public static void binary(int n){
         String a="";
