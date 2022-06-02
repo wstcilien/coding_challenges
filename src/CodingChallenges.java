@@ -4,7 +4,7 @@ import java.util.*;
 public class CodingChallenges {
     final String ok ="53";
     public static void main(String[] args) {
-        ThreeWayTree threeWayTree = new ThreeWayTree();
+//        ThreeWayTree threeWayTree = new ThreeWayTree();
 //        threeWayTree.add(1);
 //        threeWayTree.add(8);
 //        threeWayTree.add(5);
@@ -28,13 +28,13 @@ public class CodingChallenges {
             This has a time complexity of O(N).
          */
 //        prime(20);
-        int[] a = {1,5,6,7,1,2};
-        int[] c = {1,5,6,7,1,2};
+//        int[] a = {1,5,6,7,1,2};
+//        int[] c = {1,5,6,7,1,2};
 //        System.out.println(a.hashCode());
 //        System.out.println(c.hashCode());
 //        System.out.println(a.equals(c));
 
-        int[] b = {5,65,16,37,41,2};
+//        int[] b = {5,65,16,37,41,2};
         /*
             Complete
             this will print the difference of the two numbers in each array will give you the maximum value
@@ -46,9 +46,9 @@ public class CodingChallenges {
             Note: both a and can't have a length of zero
          */
 //        findAbsoluteDiff(6,a,b);
-        int[][] A = {{1,4,2,4},
-                     {1,5,3,5},
-                     {1,6,4,8}};
+//        int[][] A = {{1,4,2,4},
+//                     {1,5,3,5},
+//                     {1,6,4,8}};
         /*
             Complete
             this will print an array with the cross addition of the give two-dimensional array
@@ -88,8 +88,8 @@ public class CodingChallenges {
 
 //            this will print the number of items in the array X is greater than M-sub-i array
 
-            int[] X ={3,5,4,6,8};
-            int [] M = {5};
+//            int[] X ={3,5,4,6,8};
+//            int [] M = {5};
         /*
             This will give you {4,4,7,3,1}
             this has a time complexity of O(N)
@@ -97,7 +97,85 @@ public class CodingChallenges {
                   if the arrays in the two-dimensional array are not equal in length
          */
 
-        canBuy(M,X);
+//        canBuy(M,X);
+
+
+
+        /*
+        Completed
+        for a given String find the smallest number that can be generated without having adjacent repeating numbers.
+        The numbers can only be between 1 and 3
+
+        Exp: "13?23?" this will give you 131231
+
+        This algo has time complexity of O(N)
+         */
+        findTheSmallestNumber("?1??1");
+    }
+    public static void findTheSmallestNumber(String input){
+        int length = input.length();
+        StringBuilder result = new StringBuilder();
+
+        if(length<2){
+            if(input.charAt(0)=='?'){
+                result.append(1);
+            }else{
+                result = new StringBuilder(input);
+            }
+        }else{
+            for(int i=0;i<length;i++){
+                char current = input.charAt(i);
+                if(i>=1 && i+1 <length){
+//                    System.out.println("checking on after");
+                    int previous = (int) result.charAt(i-1);
+                    if(current == '?'){
+                        char next = input.charAt(i+1);
+                        if(next == '?'){
+                            if(previous==3 | previous ==2){
+                                result.append(1);
+                            }else{
+                                result.append(2);
+                            }
+                        }else if((int) next ==3 && previous ==2){
+                            result.append(1);
+                        }else if((int) next ==3 && previous ==1){
+                            result.append(2);
+                        }else{
+                            result.append(3);
+                        }
+                    }else{
+                        result.append(input.charAt(i));
+                    }
+
+                }else  if(i+1 == length){
+                    int previous = result.charAt(i-1);
+                    if(current == 63 && (previous == 51 | previous == 50) ){
+                        result.append(1);
+                    }else if(current ==63 && (previous ==49)){
+                        result.append(2);
+                    }else{
+                        result.append(input.charAt(i));
+                    }
+                }else{
+                    if(current == '?'){
+                        char next = input.charAt(i+1);
+                        if(next == '?'){
+                            result.append(1);
+                        }else if((int) next ==3 | (int) next ==2){
+                            result.append(1);
+                        }else{
+                            result.append(2);
+                        }
+                    }else{
+                        result.append(input.charAt(i));
+                    }
+                }
+
+
+            }
+        }
+        System.out.print("printing the smallest number that can be generated out of the string \""+input+"\" is ");
+        System.out.println(result);
     }
     public static void canBuy(int[] M,int[] X){
         Arrays.sort(X);
