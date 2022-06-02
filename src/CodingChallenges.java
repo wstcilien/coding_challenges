@@ -110,7 +110,60 @@ public class CodingChallenges {
 
         This algo has time complexity of O(N)
          */
-        findTheSmallestNumber("?1??1");
+//        findTheSmallestNumber("?1??1");
+
+        /*
+        incomplete
+
+        this will check if the given string is a valid css color hex code
+        Examples:
+        */
+//        IsValidHexCode("#CD5C5C") ➞ true
+            isValidCSS("#CD5C5C");
+//        IsValidHexCode("#EAECEE") ➞ true
+            isValidCSS("#EAECEE");
+//        IsValidHexCode("#eaecee") ➞ true
+            isValidCSS("#eaecee");
+//        IsValidHexCode("#CD5C58C") ➞ false
+            isValidCSS("#CD5C58C");
+//        // Length exceeds 6
+//
+//        IsValidHexCode("#CD5C5Z") ➞ false
+            isValidCSS("#CD5C5Z");
+//        // Not all alphabetic characters in A-F
+//
+//        IsValidHexCode("#CD5C&C") ➞ false
+            isValidCSS("#CD5C&C");
+//        // Contains unacceptable character
+//
+//        IsValidHexCode("CD5C5C") ➞ false
+            isValidCSS("CD5C5C");
+        // this algo has a time complexity of O(N)
+    }
+    public static void isValidCSS(String input){
+        boolean result = true;
+        int i=0;
+        int length = input.length();
+        if(length>=4 && length<=7){
+            for(char c:input.toCharArray()){
+                boolean between_ab = ((int)c>=97)&&((int)c<=102);
+                boolean between_AB = ((int)c>=65)&&((int)c<=70);
+
+                if(i==0 && c !='#'){
+                    result = false;
+                    break;
+                }else if(!(between_ab|between_AB |((int)c>=0 && (int)c<=57))&& i>=1){
+                    result = false;
+                    break;
+                }else{
+                    result = true;
+                    i++;
+                }
+            }
+        }else{
+            result = false;
+        }
+        System.out.println(input+" => "+result);
     }
     public static void findTheSmallestNumber(String input){
         int length = input.length();
